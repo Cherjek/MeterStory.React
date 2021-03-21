@@ -1,0 +1,15 @@
+.combo-popup {
+  position: absolute;  
+  &.hide {
+    display: none;
+  }
+  &.show {
+    display: block;
+  }  
+}
+.container-combobox {
+  width: 100%;
+  input {
+    width: inherit;
+  }
+}

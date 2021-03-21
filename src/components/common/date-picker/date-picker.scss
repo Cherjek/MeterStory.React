@@ -1,0 +1,10 @@
+.smart-react-component {
+  .react-datepicker-input, input {
+    max-height: 32px;
+    height: 32px;
+  }
+  input {
+    color: inherit !important;
+    font-weight: normal !important;
+  }
+}

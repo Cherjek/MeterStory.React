@@ -1,0 +1,12 @@
+header.main-menu, header.sub-main-menu {
+  .row {
+    justify-content: center;
+    [class*=col-] {
+      height: inherit;
+      padding: 0 1.8vw;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+  }
+}

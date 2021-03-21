@@ -1,0 +1,17 @@
+.table-tag {
+  th, td {
+    align-items: center;
+  }
+  th {
+    min-width: 3.2vw;
+    color: #A0A0A0;
+  }
+  td input[type=checkbox] {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+.panelBorder {
+  padding: 0 2em;
+}

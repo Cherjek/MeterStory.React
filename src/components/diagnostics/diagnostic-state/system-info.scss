@@ -1,0 +1,17 @@
+.sys-info {
+    &-heading {
+        margin-bottom: 10px;
+    }
+    margin-bottom: 15px;
+    &-title {
+        font-weight: 600;
+    }
+
+    &-list {
+        display: flex;
+        &-items {
+            list-style: decimal;
+            margin-top: 0;
+        }
+    }
+}
