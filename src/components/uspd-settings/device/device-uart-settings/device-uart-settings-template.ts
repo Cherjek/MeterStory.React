@@ -48,6 +48,6 @@ export class DeviceUartTemplate implements IFormTemplate {
       width: 80
     }, ...{values: this.service.stop.map(x => x.name) }},
   ];
-  gridSettings = { ...new DataGridSettings(), ...{ isRowDelete: false } };
+  gridSettings = { ...new DataGridSettings(), ...{ isRowDelete: true } };
   headerText = 'Настройки цифровых интерфейсов';
 }

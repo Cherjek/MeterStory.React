@@ -10,9 +10,6 @@ import DataExchangeMqtt from '../../data-exchange/mqtt/data-exchange-mqtt';
 import DataExchangeSmtp from '../../data-exchange/smtp/data-exchange-smtp';
 import MeterData from '../../devices-reporting/meter-data/meter-data';
 import MeterManagement from '../../devices-reporting/meter-management/meter-management';
-import MeterDataJournal from '../../devices-reporting/meter-data/meter-data-journal/meter-data-journal';
-import MeterDataInfo from '../../devices-reporting/meter-data/meter-data-info/meter-data-info';
-import MeterDataQuantity from '../../devices-reporting/meter-data/meter-data-quantity/meter-data-quantity';
 import SmtpAddress from '../../data-exchange/smtp/smtp-address/smtp-address';
 import SmtpSettings from '../../data-exchange/smtp/smtp-settings/smtp-settings';
 import SmtpAction from '../../data-exchange/smtp/smtp-action/smtp-action';
@@ -35,14 +32,11 @@ import CurrentDataInfo from '../../devices-reporting/meter-data/meter-data-info/
 import DayDataInfo from '../../devices-reporting/meter-data/meter-data-info/components/day-data-info/day-data-info';
 import MonthDataInfo from '../../devices-reporting/meter-data/meter-data-info/components/month-data-info/month-data-info';
 import HourDataInfo from '../../devices-reporting/meter-data/meter-data-info/components/hour-data-info/hour-data-info';
-import MeterArchCons from '../../devices-reporting/meter-data/meter-arch-cons/meter-arch-cons';
 import MeterArchConsDay from '../../devices-reporting/meter-data/meter-arch-cons/components/meter-arch-cons-day/meter-arch-cons-day';
 import MeterArchConsMonth from '../../devices-reporting/meter-data/meter-arch-cons/components/meter-arch-cons-month/meter-arch-cons-month';
-import MeterDataSlices from '../../devices-reporting/meter-data/meter-data-slices/meter-data-slices';
 import MeterDataSlicesEnergy from '../../devices-reporting/meter-data/meter-data-slices/components/meter-data-slices-energy/meter-data-slices-energy';
 import MeterDataSlicesQuality from '../../devices-reporting/meter-data/meter-data-slices/components/meter-data-slices-quality/meter-data-slices-quality';
 import MeterDataSlicesConfig from '../../devices-reporting/meter-data/meter-data-slices/components/meter-data-slices-config/meter-data-slices-config';
-import MeterDataCardFeatures from '../../devices-reporting/meter-data/meter-data-card-features/meter-data-card-features';
 import NetworkCsdSettings from '../../uspd-settings/network/network-csd-settings/network-csd-settings';
 import NetworkIpSettings from '../../uspd-settings/network/network-ip-settings/network-ip-settings';
 import NetworkModem from '../../uspd-settings/network/network-modem/network-modem';
@@ -58,6 +52,22 @@ import JournalsSharedForm from '../../journals/shared-form';
 import JournalsDevice from '../../journals/device/device';
 import JournalsModem from '../../journals/modem/modem';
 import JournalsMeter from '../../journals/meter/meter';
+import MetersDataView from '../../devices-reporting/meter-data/meter-info-types/meters-data-view';
+import MeterDataJournal from '../../devices-reporting/meter-data/meter-data-journal/meter-data-journal';
+import MeterDataInfo from '../../devices-reporting/meter-data/meter-data-info/meter-data-info';
+import MeterDataQuantity from '../../devices-reporting/meter-data/meter-data-quantity/meter-data-quantity';
+import MeterArchCons from '../../devices-reporting/meter-data/meter-arch-cons/meter-arch-cons';
+import MeterDataSlices from '../../devices-reporting/meter-data/meter-data-slices/meter-data-slices';
+import MeterDataCardFeatures from '../../devices-reporting/meter-data/meter-data-card-features/meter-data-card-features';
+import DiscretCurrentInfo from '../../devices-reporting/meter-data/meter-data-info/components/discret-data/discret-current-info';
+import DiscretArchInfo from '../../devices-reporting/meter-data/meter-data-info/components/discret-data/discret-arch-info';
+import DiscretSliceInfo from '../../devices-reporting/meter-data/meter-data-info/components/discret-data/discret-slice-info';
+import PlsCurrentDataInfo from '../../devices-reporting/meter-data/meter-data-info/components/puls-meters-data/pls-current-data-info';
+import PlsDayDataInfo from '../../devices-reporting/meter-data/meter-data-info/components/puls-meters-data/pls-day-data-info';
+import PlsMonthDataInfo from '../../devices-reporting/meter-data/meter-data-info/components/puls-meters-data/pls-month-data-info';
+import PlsHourDataInfo from '../../devices-reporting/meter-data/meter-data-info/components/puls-meters-data/pls-hour-data-info';
+import PlsSliceDataInfo from '../../devices-reporting/meter-data/meter-data-info/components/puls-meters-data/pls-slice-data-info';
+
 export class MenuRoute {
   code?: string;
   name?: string;
@@ -91,9 +101,9 @@ export const menuRoutes: MenuRoute[] = [
       url: '/admin/servers',
       component: AdminServers,
       submenu: [
-        { url: '#httpserver', name: 'Администрирование HTTP-сервера' },
-        { url: '#rtu327', name: 'Администрирование сервера RTU327' },
-        { url: '#textprotocol', name: 'Администрирование сервера текстового протокола' }
+        { url: '/admin/servers#httpserver', name: 'Администрирование HTTP-сервера' },
+        { url: '/admin/servers#rtu327', name: 'Администрирование сервера RTU327' },
+        { url: '/admin/servers#textprotocol', name: 'Администрирование сервера текстового протокола' }
       ]
     }, {
       code: 'adminDisks',
@@ -101,8 +111,8 @@ export const menuRoutes: MenuRoute[] = [
       url: '/admin/disks',
       component: AdminDisks,
       submenu: [
-        { url: '#usb', name: 'Настройки видимости файловой системы по USB' },
-        { url: '#diskclear', name: 'Управление файловой системой (очистка)' }
+        { url: '/admin/disks#usb', name: 'Настройки видимости файловой системы по USB' },
+        { url: '/admin/disks#diskclear', name: 'Управление файловой системой (очистка)' }
       ]
     }]
   },
@@ -116,10 +126,10 @@ export const menuRoutes: MenuRoute[] = [
       url: '/uspd-settings/time',
       component: TimeSettings,
       submenu: [
-        { url: '#settime', name: 'Установка времени' },
-        { url: '#localtime', name: 'Настройка локального времени' },
-        { url: '#serverssync', name: 'Сервера синхронизации времени' },
-        { url: '#conditionssync', name: 'Условия синхронизации времени' }
+        { url: '/uspd-settings/time#settime', name: 'Установка времени' },
+        { url: '/uspd-settings/time#localtime', name: 'Настройка локального времени' },
+        { url: '/uspd-settings/time#serverssync', name: 'Сервера синхронизации времени' },
+        { url: '/uspd-settings/time#conditionssync', name: 'Условия синхронизации времени' }
       ]
     }, {
       code: 'settingsUSPDDevice',
@@ -164,26 +174,35 @@ export const menuRoutes: MenuRoute[] = [
     }, {
       code: 'meterData',
       name: 'Данные приборов учета',
-      url: '/meter/data',
+      url: '/meter/data-view',
       component: MeterData,
       submenu: [
-        { url: '/meter/data/info', name: 'Показания', component: MeterDataInfo },
-        { url: '/meter/data/quality', name: 'Качество сети', component: MeterDataQuantity },
-        { url: '/meter/data/slices', name: 'Срезы', component: MeterDataSlices },
-        { url: '/meter/data/consumption', name: 'Потребление', component: MeterArchCons },
-        { url: '/meter/data/card-features', name: 'Профили мощности', component: MeterDataCardFeatures },
-        { url: '/meter/data/journal', name: 'Данные журналов', component: MeterDataJournal }
+        { url: '/meter/data-view/meters', name: 'Электросчетчики', component: MetersDataView },
+        { url: '/meter/data-view/puls-meters', name: 'Импульсные счетчики', component: MetersDataView },
+        { url: '/meter/data-view/discrete-modules', name: 'Модули дискретных вводов', component: MetersDataView },        
       ]
+      // submenu: [
+      //   { url: '/meter/data-view/info', name: 'Показания', component: MeterDataInfo },
+      //   { url: '/meter/data-view/quality', name: 'Качество сети', component: MeterDataQuantity },
+      //   { url: '/meter/data-view/slices', name: 'Срезы', component: MeterDataSlices },
+      //   { url: '/meter/data-view/consumption', name: 'Потребление', component: MeterArchCons },
+      //   { url: '/meter/data-view/card-features', name: 'Профили мощности', component: MeterDataCardFeatures },
+      //   { url: '/meter/data-view/journal', name: 'Данные журналов', component: MeterDataJournal }
+      // ]
+    }, {
+      code: 'meterSlices',
+      url: '/meter/slices-config', 
+      name: 'Аппаратная конфигурация', component: MeterDataSlicesConfig
     }, {
       code: 'meterManagPU',
       name: 'Управление приборами учета',
       url: '/meter/management',
       component: MeterManagement,
       submenu: [
-        { url: '#timestate', name: 'Текущее время' },
-        { url: '#settime', name: 'Установка времени' },
-        { url: '#relaystate', name: 'Состояние реле' },
-        { url: '#managrele', name: 'Управление реле' }
+        { url: '/meter/management#timestate', name: 'Текущее время' },
+        { url: '/meter/management#settime', name: 'Установка времени' },
+        { url: '/meter/management#relaystate', name: 'Состояние реле' },
+        { url: '/meter/management#managrele', name: 'Управление реле' }
       ]
     }]
   },
@@ -200,6 +219,7 @@ export const menuRoutes: MenuRoute[] = [
         { url: '/data-exchange/mqtt/settings', name: 'Настройка', component: MqttSettings },
         { url: '/data-exchange/mqtt/action', name: 'Формирование публикаций', component: MqttAction },
         { url: '/data-exchange/mqtt/messages', name: 'Сообщения', component: MessagesDataExchange },
+        { url: '/data-exchange/mqtt/meter-messages', name: 'Данные ПУ', component: MeterMessagesDataExchange },
         { url: '/data-exchange/mqtt/schdl-event-table', name: 'Расписания', component: SchdlEventTable }
       ]
     }, {
@@ -237,7 +257,7 @@ export const menuRoutes: MenuRoute[] = [
       ]
     }, {
       code: 'journals-modem',
-      name: 'Модем журналы',
+      name: 'Модем',
       url: '/journals/modem',
       component: JournalsModem,
       submenu: [
@@ -292,7 +312,7 @@ export const menuRoutes: MenuRoute[] = [
         { url: '/diagnostics/system-info', name: 'Конфигурация системы', component: SysInfo },
         { url: '/diagnostics/system-state', name: 'Операционная система', component: OsState },
         { url: '/diagnostics/network-state', name: 'Сетевые подключения', component: NetworkState },
-        // { url: '/diagnostics/modem-state', name: 'Модем', component: DiagnosticState },
+        { url: '/diagnostics/modem-state', name: 'Модем', component: DiagnosticState },
         { url: '/diagnostics/number-state', name: 'Цифровые интерфейсы', component: DiagnosticState },
         // { url: '/diagnostics/clock-state', name: 'Часы устройства', component: DiagnosticState }
       ]
@@ -311,55 +331,164 @@ export const menuRoutes: MenuRoute[] = [
   }
 ];
 
+
+export const meterDataViewTypes = [
+  // Элекстросчетчики
+  [
+    {
+      url: '/meter/data-view/meters/info',
+      name: 'Показания',
+      component: MeterDataInfo,
+    },
+    {
+      url: '/meter/data-view/meters/quality',
+      name: 'Параметры электросети',
+      component: MeterDataQuantity,
+    },
+    // {
+    //   url: '/meter/data-view/meters/slices',
+    //   name: 'Срезы',
+    //   component: MeterDataSlices,
+    // },
+    {
+      url: '/meter/data-view/meters/consumption',
+      name: 'Потребление',
+      component: MeterArchCons,
+    },
+    {
+      url: '/meter/data-view/meters/card-features',
+      name: 'Профили мощности',
+      component: MeterDataCardFeatures,
+    },
+    {
+      url: '/meter/data-view/meters/journal',
+      name: 'Журналы',
+      component: MeterDataJournal,
+    },
+  ],
+  // Импульсные
+  [
+    {
+      url: '/meter/data-view/puls-meters/info',
+      name: 'Показания',
+      component: MeterDataInfo,
+    },
+    {
+      url: '/meter/data-view/puls-meters/journal',
+      name: 'Журналы',
+      component: MeterDataJournal,
+    },
+  ],
+  // Дискретные
+  [
+    {
+      url: '/meter/data-view/discrete-modules/info',
+      name: 'Показания',
+      component: MeterDataInfo,
+    },
+    {
+      url: '/meter/data-view/discrete-modules/journal',
+      name: 'Журналы',
+      component: MeterDataJournal,
+    },
+  ]
+];
+
 export const meterDataTabRoutes = [
   {
-    url: '/meter/data/info/current',
+    url: '/current',
     name: 'Текущие показания энергии',
     component: CurrentDataInfo,
   },
   {
-    url: '/meter/data/info/day',
+    url: '/day',
     name: 'Показания на начало суток',
     component: DayDataInfo,
   },
   {
-    url: '/meter/data/info/month',
+    url: '/month',
     name: 'Показания на начало месяца',
     component: MonthDataInfo,
   },
   {
-    url: '/meter/data/info/hour',
+    url: '/hour',
     name: 'Показания на начало часа',
     component: HourDataInfo,
   },
 ];
 
+export const meterPulsDataTabRoutes = [
+  {
+    url: '/current',
+    name: 'Текущие показания импульсов',
+    component: PlsCurrentDataInfo,
+  },
+  {
+    url: '/slice',
+    name: 'Срезы показаний',
+    component: PlsSliceDataInfo,
+  },  
+  {
+    url: '/day',
+    name: 'Показания на начало суток',
+    component: PlsDayDataInfo,
+  },
+  {
+    url: '/month',
+    name: 'Показания на начало месяца',
+    component: PlsMonthDataInfo,
+  },
+  {
+    url: '/hour',
+    name: 'Показания на начало часа',
+    component: PlsHourDataInfo,
+  },
+];
+
 export const meterArchConsRoutes = [
   {
-    url: '/meter/data/consumption/day',
+    url: '/day',
     name: 'Потребление за сутки',
     component: MeterArchConsDay,
   },
   {
-    url: '/meter/data/consumption/month',
+    url: '/month',
     name: 'Потребление за месяц',
     component: MeterArchConsMonth,
   }
 ];
 
+export const meterDiscreteConsRoutes = [
+  {
+    url: '/current',
+    name: 'Текущее состояние вводов',
+    component: DiscretCurrentInfo,
+  }, 
+  {
+    url: '/slice',
+    name: 'Срезы показаний',
+    component: DiscretSliceInfo,
+  },
+  {
+    url: '/arch',
+    name: 'Архив изменения состояний вводов',
+    component: DiscretArchInfo,
+  },
+];
+
 export const meterDataSlicesRoutes = [
   {
-    url: '/meter/data/slices/config',
+    url: '/meter/data-view/slices/config',
     name: 'Срезы аппаратной конфигурации',
     component: MeterDataSlicesConfig,
   },
   {
-    url: '/meter/data/slices/energy',
+    url: '/meter/data-view/slices/energy',
     name: 'Срезы показаний энергии',
     component: MeterDataSlicesEnergy,
   },
   {
-    url: '/meter/data/slices/quality',
+    url: '/meter/data-view/slices/quality',
     name: 'Срезы показателей качества сети',
     component: MeterDataSlicesQuality,
   }
@@ -377,12 +506,47 @@ const reducer = (state: any, action: any) => {
 
 export const generateListRoutes = () =>  {
   const recursive = (routes: MenuRoute[], result: MenuRoute[]) => {
-    routes.forEach(menu => {
+    (routes || []).forEach(menu => {
       if (menu.url) {
         result.push(menu);
+        if (menu.url.includes('/meter/data-view/meters')) {
+          meterDataViewTypes[0].forEach((x, index) => {
+            result.push(x);
+            if (index === 0) {
+              meterDataTabRoutes.slice(0, 3).forEach(y => {
+                const _ = {...y};
+                _.url = `${x.url}${y.url}`;
+                result.push(_);
+              });
+            }
+          });
+        } else if (menu.url.includes('/meter/data-view/puls-meters')) {
+          meterDataViewTypes[1].forEach((x, index) => {
+            result.push(x);
+            if (index === 0) {
+              meterPulsDataTabRoutes.forEach(y => {
+                const _ = {...y};
+                _.url = `${x.url}${y.url}`;
+                result.push(_);
+              });
+            }
+          });
+        } else if (menu.url.includes('/meter/data-view/discrete-modules')) {
+          meterDataViewTypes[2].forEach((x, index) => {
+            result.push(x);
+            if (index === 0) {
+              meterDiscreteConsRoutes.forEach(y => {
+                const _ = {...y};
+                _.url = `${x.url}${y.url}`;
+                result.push(_);
+              });
+            }
+          });
+        }
       }
-      if (menu.children) {
-        recursive(menu.children, result);
+      const children = menu.children || menu.submenu;
+      if (children) {
+        recursive(children, result);
       }
     });
   }
@@ -443,16 +607,16 @@ export const MainMenu = () => {
       <header className="bread-crumbs">
         <div className="row">
           <div className="col-auto">
+{/*
             {
               ((state as any).selectMenu as MenuRoute)
-                ?.children
-                ?.map(sm => sm.name).join(' > ')
+                  ?.children
+                  ?.map(sm => sm.name).join(' > ')
             }
+*/}
           </div>
         </div>
       </header>
-
-
     </>
   );
 }

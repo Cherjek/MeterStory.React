@@ -1,7 +1,7 @@
 export const remoteUrl = // 'http://192.168.202.230'
-  'http://icbcom.allmonitoring.local';
-  // 'http://192.168.205.101';
-  // '';
+  // 'http://icbcom.allmonitoring.local';
+  'http://192.168.205.103';
+  //'';
 
 export class Fetch {
   constructor(public url: string) {}
@@ -26,11 +26,24 @@ export class Fetch {
     return this.baseFetch(null, 'DELETE');
   }
 
+  protected upload(file: any) {
+    const formData = new FormData();
+    formData.append('file', file);
+    const method = {
+      method: 'POST', // Method itself
+      // headers: {
+      //  'Content-type': 'multipart/form-data' // Indicates the content
+      // },
+      body: formData
+    }
+    return fetch(remoteUrl + this.url, method);
+  }
+
   private checkStatus = (result: any) => {
     if (result.status === 404 || result.status === 403) {
       window.location.href = '/login';
     } else if (result.status >= 400) {
-      return 'Не корректный запрос';
+      return 'Некорректный запрос';
     }
     return null;
   }
@@ -38,7 +51,7 @@ export class Fetch {
     const method = {
       method: type, // Method itself
       headers: {
-        'Content-type': 'application/json; charset=UTF-8' // Indicates the content 
+        'Content-type': 'application/json; charset=UTF-8' // Indicates the content
       },
       credentials: 'include'
      }
@@ -51,7 +64,7 @@ export class Fetch {
           const error = this.checkStatus(res);
           if (error) {
             throw new Error(error);
-          } else {            
+          } else {
             resolve(res);
           }
         })

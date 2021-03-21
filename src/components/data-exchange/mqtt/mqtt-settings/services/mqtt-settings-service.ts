@@ -1,7 +1,7 @@
 import { Fetch } from '../../../../../core/service';
 import { MqttSettings } from './models/mqtt-settings';
 
-export const mqttSettingsType = ['MQTT 3.1.1','MQTT SN'];
+export const mqttSettingsType = ['MQTT 3.1.1'/*,'MQTT SN'*/];
 export const mqttSettingsCropt = ['По умолчанию','Без шифрования','Шифрование соединения'];
 
 export class MqttSettingsService extends Fetch {

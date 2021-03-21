@@ -38,7 +38,7 @@ const DeviceDoutSettings = () => {
       width: 250
     }, ...{values: stateDeviceDout}}
   ];
-  const gridSettings = {...new DataGridSettings(), ...{ isRowDelete: false, isHorizontalScroll: false }};
+  const gridSettings = {...new DataGridSettings(), ...{ isRowDelete: true, isHorizontalScroll: false }};
   const columns2: DataGridColumn[] = [
     {
       code: 'addr',
@@ -74,7 +74,7 @@ const DeviceDoutSettings = () => {
   return (
     <div className="row no-gutters-2">
       <div className="col-3">
-        <SidebarMenu items={[{ url: '#dout-settings', name: 'Настройки линий питания' },{ url: '#dout-state', name: 'Состояние линий питания' }]} />
+        <SidebarMenu items={[{ url: 'uspd-settings/device/dout#dout-settings', name: 'Настройки линий питания' },{ url: 'uspd-settings/device/dout#dout-state', name: 'Состояние линий питания' }]} />
       </div>
       <div className="col">
         {

@@ -29,7 +29,7 @@ export const SidebarMenu = (props) => {
   React.useEffect(() => {
     const sidebarItems = props.items || getSideBarItems();
     const selectSidebarMenu = sidebarItems?.find((x: MenuRoute) => x.url === anchor);
-    dispatch({ sidebarItems, selectSidebarMenu })
+    dispatch({ sidebarItems, selectSidebarMenu });
   }, []);
   return props.tabView ? (
     <React.Fragment>

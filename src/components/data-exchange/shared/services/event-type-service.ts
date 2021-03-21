@@ -10,6 +10,19 @@ export class EventTypeService implements ICallbackColumnService {
   static schedulers: string[];
   static messages: string[];
   static dataPU: string[];
+  deleteZeroValues = (v) => {
+    let result = [`id: ${v.id}`]
+    if (v.day) {
+      result.push(`день: ${v.day}`)
+    }
+    if (v.hour) {
+      result.push(`час: ${v.hour}`)
+    }
+    if (v.min) {
+      result.push(`мин: ${v.min}`)
+    }
+    return result.join(', ')
+  }
   getData(dependVal: any) {
     return new Promise<any[]>((resolve, reject) => {
       if (dependVal === 'Расписание') {
@@ -20,7 +33,7 @@ export class EventTypeService implements ICallbackColumnService {
           this.schedulerService
               .getData()
               .then(result => {
-                EventTypeService.schedulers = ['', ...result?.map(v => `id: ${v.id}, день: ${v.day}, час: ${v.hour}, мин: ${v.min}, задержка: ${v.delay}, тип: ${v.type}`)];
+                EventTypeService.schedulers = ['', ...result?.map(v => this.deleteZeroValues(v))];
                 resolve(EventTypeService.schedulers);
               })
         } else {

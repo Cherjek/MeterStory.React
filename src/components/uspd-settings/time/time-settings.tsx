@@ -14,6 +14,7 @@ import { SntpActionSettings } from './services/models/sntp-action-settings';
 import { TimeService } from './services/time-service';
 import { Time } from './services/models/time';
 import { TypeEventsColumns } from '../../data-exchange/shared/services/data-grid-columns-callback';
+import { TimeActionService } from './services/time-action-service';
 
 import './time-settings.scss'
 
@@ -30,6 +31,7 @@ const sntpSettingsService = new SntpSettingsService();
 const timeSettingsService = new TimeSettingsService();
 const sntpActionSettingsService  = new SntpActionSettingsService();
 const timeService = new TimeService();
+const timeActionService = new TimeActionService();
 const TimeSettings = () => {
   const [state, setDataSource] = React.useReducer(reducer, initialState);
   const columns: DataGridColumn[] = [
@@ -57,7 +59,7 @@ const TimeSettings = () => {
     },
     ...TypeEventsColumns
   ];
-  const gridSettings = {...new DataGridSettings(), ...{ isRowDelete: false }};
+  const gridSettings = {...new DataGridSettings(), ...{ isRowDelete: true }};
   React.useEffect(() => {
     let mounted = true;
 
@@ -196,7 +198,7 @@ const TimeSettings = () => {
                       className="btn btn-primary"
                       content="Записать"
                       clickAsync={() =>
-                        timeSettingsService.saveData(state?.localTimeSettings)
+                        timeActionService.saveData({time:state?.time?.settime})
                       }
                       onMessage={(message: any) =>
                         setDataSource({ handleMessage: message })

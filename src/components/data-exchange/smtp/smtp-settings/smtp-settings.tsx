@@ -72,7 +72,7 @@ const SmtpSettings = () => {
       width: 150
     },
   ];
-  const gridSettings = {...new DataGridSettings(), ...{ isRowDelete: false, isHorizontalScroll: true }};
+  const gridSettings = {...new DataGridSettings(), ...{ isRowDelete: true, isHorizontalScroll: true }};
   const onCellEdit = (val) => {
     if (val.col.code === 'certCheck') {
       if (val.row[val.col.code]) {

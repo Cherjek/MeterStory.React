@@ -9,7 +9,7 @@ const DayDataInfo = () => {
         measureCode: 'aDay',
         showDuration: true,
         tableHeader: 'Показания на начало суток',
-        groupsPu: [_groupsTypeMeterDictionary[0],_groupsTypeMeterDictionary[1]]
+        groupsPu: [_groupsTypeMeterDictionary[0]]
       }}
     />
   );

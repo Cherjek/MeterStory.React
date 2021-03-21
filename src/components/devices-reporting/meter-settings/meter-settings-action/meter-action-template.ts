@@ -19,6 +19,6 @@ export class MeterActionTemplate implements IFormTemplate {
       type: DataGridColumnType.Combobox
     }, ...{values: pollType}}
   ];
-  gridSettings = { ...new DataGridSettings(), ...{ isRowDelete: false } };
+  gridSettings = { ...new DataGridSettings(), ...{ isRowDelete: true } };
   headerText = 'Опрос приборов учета по событиям';
 }

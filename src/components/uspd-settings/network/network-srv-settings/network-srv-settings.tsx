@@ -51,7 +51,7 @@ const NetworkSrvSettings = () => {
       type: DataGridColumnType.String
     }
   ];
-  const gridSettings = {...new DataGridSettings(), ...{ isRowDelete: false, isHorizontalScroll: false }};
+  const gridSettings = {...new DataGridSettings(), ...{ isRowDelete: true, isHorizontalScroll: false }};
   const onCellEdit = (val) => {
     if (val.col.code === 'cert'
     || val.col.code === 'key') {

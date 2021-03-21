@@ -10,7 +10,6 @@ import { MeterArchTemplate } from '../services/models/meter-arch-template';
 import { MeterArchStorage } from '../services/models/meter-arch-storage';
 import ComboBox from '../../../../common/combo-box/combo-box';
 const initialState = {
-  dataSource: null,
   loading: false,
   comboSource: null,
   template: null
@@ -18,7 +17,7 @@ const initialState = {
 const reducer = (state: any, action: any) => {
   if (action.type === 'INIT') {
     const result = {
-      comboSource: (action.dataSource as MeterArchTemplate[]).map((x) => {
+      comboSource: (action.comboSource as MeterArchTemplate[]).map((x) => {
         x['name'] = `id: ${x.id}, тип: ${x.type}`;
         return x;
       }),
@@ -40,7 +39,8 @@ const reducer = (state: any, action: any) => {
 };
 const MeterArchData = (props) => {
   const [state, setDataSource] = useReducer(reducer, initialState);
-  const gridSettings = { ...new DataGridSettings(), ...{ isRowDelete: false } };
+  const gridSettings = { ...new DataGridSettings(), ...{ isRowDelete: true } };
+
   const columns: DataGridColumn[] = [
     {
       ...{
@@ -57,19 +57,22 @@ const MeterArchData = (props) => {
     },
   ];
   useEffect(() => {
-    if (!state.loading) setDataSource({ type: 'INIT', dataSource: props.dataSource });
+    if (!state.loading && state.comboSource == null) setDataSource({ type: 'INIT', comboSource: props.dataSource });
     if (state.loading) setTimeout(() => setDataSource({ loading: false}), 1000);
   }, [props.dataSource, state.loading]);
   return (
     <React.Fragment>
       <div className="row vertical">
         <div className="col">
+          {state.comboSource == null ? 'Загрузка...' :
           <ComboBox
             uniqueId="template"
             valueField="name"
+            defSelectValue={state.comboSource[0]}
             dataSource={state.comboSource}
             onSelected={(val) => setDataSource({ loading: true, template: val })}
           />
+          }
         </div>
         <div className="col">
           {state.loading ? 'Загрузка...' :

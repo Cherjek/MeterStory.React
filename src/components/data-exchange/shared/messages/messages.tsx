@@ -21,7 +21,7 @@ const reducer = (state: any, action: any) => {
 const messagesOperatorService = new MessagesOperatorService();
 const MessagesDataExchange = () => {
   const [state, setDataSource] = React.useReducer(reducer, initialState);
-  const gridSettings = { ...new DataGridSettings(), ...{ isRowDelete: false } };
+  const gridSettings = { ...new DataGridSettings(), ...{ isRowDelete: true } };
   const columns: DataGridColumn[] = [
     {
       code: 'id',

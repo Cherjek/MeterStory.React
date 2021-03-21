@@ -6,6 +6,7 @@ import { DoutStateService, addrValues as addrDoutValues, stateValues as stateDou
 import { DataFlashStateService } from './services/dataflash-state-service';
 import { SystemStateService, states as systemStates } from './services/system-state-service';
 import { UartStateService } from './services/uart-state-service';
+import { ModemStateService } from './services/modem-state-service';
 
 export const FormInterface = {
   '/diagnostics/din-state': {
@@ -200,7 +201,24 @@ export const FormInterface = {
 
   },
   '/diagnostics/modem-state': {
-
+    init: () => {
+      const formInterfaceService = new FormInterfaceService();
+      formInterfaceService.columns = [
+        {
+          code: 'property',
+          name: 'Свойство',
+          type: DataGridColumnType.String
+        },
+        {
+          code: 'value',
+          name: 'Значение',
+          type: DataGridColumnType.String
+        }
+      ];
+      formInterfaceService.service = new ModemStateService();
+      formInterfaceService.caption = 'Информация о модеме';
+      return formInterfaceService;
+    }
   },
   '/diagnostics/number-state': {
     init: () => {

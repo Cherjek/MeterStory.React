@@ -23,6 +23,12 @@ const reducer = (state: any, action: any) => {
 const meterDataJournalService = new MeterDataJournalService();
 const meterSettingsTableService = new MeterSettingsTableService();
 const MeterDataJournal = () => {
+  let journals = meterDataJournalService.getJournals();
+  const path = window.location.pathname;
+  if (path.includes('/meter/data-view/puls-meters') ||
+    path.includes('/meter/data-view/discrete-modules')) {
+    journals = journals.filter(x => x.code === 'jrnlPwr' || x.code === 'jrnlTimeCorr');
+  }  
   const [state, setDataSource] = useReducer(reducer, initialState);
   const columns: DataGridColumn[] = [
     {
@@ -129,12 +135,12 @@ const MeterDataJournal = () => {
                         onClear={() => { }}
                       />
                     </td>
-                    <td>
+                    <td className="journal-td">
                       <ComboBox
                         uniqueId="journal"
                         keyField="code"
                         valueField="name"
-                        dataSource={meterDataJournalService.getJournals()}
+                        dataSource={journals}
                         onSelected={(val) => setDataSource({ journal: val })}
                       />
                     </td>
@@ -151,16 +157,21 @@ const MeterDataJournal = () => {
                     clickAsync={() => {
                       return new Promise((resolve, reject) => {
                           const req = new MeterJournalRequest();
-                          req.ids = [state.pu.id];
+                          if (state.pu != null) {
+                            req.ids = [state.pu.id];
+                          }
                           req.measures = [state.journal.code];
-                          const timeJournal = new TimeJournal();
-                          if (state.dateStart) {
-                            timeJournal.start = state.dateStart;
-                          }
-                          if (state.dateEnd) {
-                            timeJournal.end = state.dateEnd;
-                          }
-                          req.time = [timeJournal];
+                          let timeJournal;
+                          if (state.dateStart != null || state.dateEnd != null) {
+                            timeJournal = new TimeJournal();
+                            if (state.dateStart) {
+                              timeJournal.start = state.dateStart;
+                            }
+                            if (state.dateEnd) {
+                              timeJournal.end = state.dateEnd;
+                            }
+                            req.time = [timeJournal];
+                          }                          
                           meterDataJournalService
                           .getJournalRecord(req)
                           .then((result) => {

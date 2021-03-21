@@ -13,8 +13,8 @@ export class MeterDataCardFeaturesService extends Fetch {
     { code: 'TagQp', name: 'Q+', checked: false },
     { code: 'TagQm', name: 'Q-', checked: false },
     { code: 'TagFlags', name: 'Флаги', checked: false },
-    { code: 'TagPls', name: 'Pls', checked: false },
-    { code: 'TagChnl', name: 'Chnl', checked: false }
+    // { code: 'TagPls', name: 'Pls', checked: false },
+    // { code: 'TagChnl', name: 'Chnl', checked: false }
   ];
 
   columns: DataGridColumn[] = [

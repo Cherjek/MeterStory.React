@@ -88,6 +88,10 @@ input,
 textarea {
   box-sizing: border-box;
 }
+input[type=checkbox] {
+  width: 0.9rem;
+  height: 0.9rem;
+}
 
 hr {
   height: 0;
@@ -151,7 +155,7 @@ hr {
     overflow-x: hidden;
     scroll-behavior: smooth;
     flex: 1 1 auto;
-    height: calc(100vh - 30vh);
+    height: calc(100vh - 34vh);
     > .group-panel:not(:last-child) {
       margin-bottom: 3vh;
     }
@@ -262,7 +266,7 @@ header.sub-main-menu {
 
 header.bread-crumbs {
   background-color: $color__dark;
-  height: $header-height__5 / 1.2;
+  height: $header-height__5 / 2.4;
   padding-left: 13vw;
   padding-right: 13vw;
 }
@@ -330,15 +334,15 @@ header.sub-main-menu {
 }
 .navigate-sidebar-tab {
   font-weight: $font-weight__middle;
-  a {
-    padding: 1vh 0;
-  }
+  // a {
+  //   padding: 1vh 0;
+  // }
   a.active {
     border-bottom: 3px solid;
     color: $color__light-blue !important;
   }
-  height: 6vh;
-  min-height: 6vh;
+  height: 3vh;
+  min-height: 3vh;
 }
 
 .text-color__white {
@@ -429,6 +433,12 @@ input[type=submit].btn-outline-secondary {
     background-color: #526a87 !important;
   }
 }
+button.reload {
+  width: 5rem;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 55%;  
+}
 .border-circle {
   border-radius: 200px 200px 200px 200px;
   -moz-border-radius: 200px 200px 200px 200px;
@@ -455,6 +465,8 @@ button.button-action {
     transition: opacity 0.3s;
   }
 }
+
+
 
 .form-control {
   display: block;

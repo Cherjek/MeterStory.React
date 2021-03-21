@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 // import { DatePickerInput } from 'rc-datepicker';
 // import 'moment/locale/ru.js';
 // import 'rc-datepicker/lib/style.css';
@@ -7,7 +8,8 @@ import './date-picker.scss';
 const DatePicker = (props) => {
   const onChange = (jsDate, dateString) => {
     if (props.onChange) {
-      props.onChange(jsDate, (dateString + ':00+03:00'));
+      const dateFormat = moment(jsDate).format();
+      props.onChange(jsDate, dateFormat);
     }
   }
   // const onClear = () => {

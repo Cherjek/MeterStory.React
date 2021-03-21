@@ -22,7 +22,7 @@ const MeterDataSlices = () => {
               component={route.component}
             />
           ))}
-          <Redirect from="/" to="/meter/data/slices/config" />
+          <Redirect from="/" to="/meter/data-view/slices/config" />
         </Switch>
       </div>
     </div>

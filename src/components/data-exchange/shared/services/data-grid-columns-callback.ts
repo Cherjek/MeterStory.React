@@ -20,7 +20,7 @@ export const TypeEventsColumns: DataGridComboboxColumnCallback[] = [
   }, ...{values: ['', ...typeEvents]}}),
   Object.assign(new DataGridComboboxColumnCallback(), {
     code: 'eventId',
-    name: 'ID события',
+    name: 'Условия события',
     type: DataGridColumnType.Combobox,
     parent: 'eventType',
     source: new DataGridComboboxSource(new EventTypeService()),

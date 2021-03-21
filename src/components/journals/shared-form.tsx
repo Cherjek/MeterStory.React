@@ -51,7 +51,7 @@ const JournalsSharedForm = () => {
         <></>
       )}
       <div className="scroll-container">
-        <div className="scroll-view">
+        <div className="scroll-view tab">
           <div className="row vertical group-panel">
             <div className="col">
               <label>{formInterfaceService.caption.toUpperCase()}</label>

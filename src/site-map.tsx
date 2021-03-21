@@ -13,11 +13,11 @@ const SiteMap = () => {
                     return (
                       <React.Fragment>
                         <p>{x.url}</p>
-                        {x.submenu ? (
+                        {/* {x.submenu ? (
                           x.submenu.map((y) => y.url[0] !== '#' ? <p>{y.url}</p> : <></>)
                         ) : (
                           <></>
-                        )}
+                        )} */}
                       </React.Fragment>
                     );
                 })

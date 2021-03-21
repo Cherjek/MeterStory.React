@@ -67,7 +67,7 @@ const NetworkModem = () => {
   ];
   const gridSettings = {
     ...new DataGridSettings(),
-    ...{ isRowDelete: false, isHorizontalScroll: false },
+    ...{ isRowDelete: true, isHorizontalScroll: false },
   };
   const gridSettings2 = {
     ...new DataGridSettings(),

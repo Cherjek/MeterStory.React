@@ -29,6 +29,6 @@ export class DeviceDinTemplate implements IFormTemplate {
       width: 200
     }, ...{values: stateDeviceDin }},
   ];
-  gridSettings = { ...new DataGridSettings(), ...{ isRowDelete: false } };
+  gridSettings = { ...new DataGridSettings(), ...{ isRowDelete: true } };
   headerText = 'Настройки дискретных входов';
 }

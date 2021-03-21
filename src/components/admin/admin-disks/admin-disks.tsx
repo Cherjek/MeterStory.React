@@ -6,7 +6,7 @@ import { DataGridSettings } from '../../common/data-grid/data-grid-settings';
 import DataGrid from '../../common/data-grid/data-grid';
 import ButtonAsync from '../../common/button-async/button-async';
 import MessagePopup from '../../common/message-popup/message-popup';
-import { DiskAccessSettingsService } from './services/disk-access-settings-service';
+import {DiskAccessSettingsService, DiskClearService} from './services/disk-access-settings-service';
 import { DiskSettings } from './services/models/disk-access-settings';
 
 const initialState = {
@@ -17,6 +17,7 @@ const reducer = (state: any, action: any) => {
   return {...state, ...action };
 }
 const serviceDisk = new DiskAccessSettingsService();
+const clearDisk = new DiskClearService();
 
 const AdminDisks = (props: any) => {
   const [state, updateState] = React.useReducer(reducer, initialState);
@@ -115,7 +116,7 @@ const AdminDisks = (props: any) => {
                           <ButtonAsync 
                             className="btn btn-outline-secondary"
                             content="Очистить"
-                            clickAsync={() => serviceDisk.diskClear(state.diskNumber)}
+                            clickAsync={() => clearDisk.diskClear({name: `${state.diskNumber}`})}
                             onMessage={(message: any) => updateState({ handleAppError: message}) }                 
                           />
                         </div>                
@@ -125,8 +126,7 @@ const AdminDisks = (props: any) => {
                 </div>            
               </div>
             </div>
-          </div>         
-        
+          </div>
         </div>
       </div>
     </React.Fragment>    

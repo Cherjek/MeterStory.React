@@ -16,13 +16,11 @@ const initialState = {
   groupPuIndex: null
 };
 const reducer = (state: any, action: any) => {
-  console.log(JSON.stringify(action));
+  //console.log(JSON.stringify(action));
   return { ...state, ...action };
 };
-
+const meterSettingsTableService = new MeterSettingsTableService();
 const PeriodDataInfo = (props) => {
-  const meterSettingsTableService = new MeterSettingsTableService();
-
   const [state, setDataSource] = useReducer(reducer, initialState);
   // const startTime = useRef(null);
   // const endTime = useRef(null);

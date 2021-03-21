@@ -7,14 +7,20 @@ import './meter-arch-cons.scss';
 
 const history = createBrowserHistory();
 const MeterArchCons = () => {
+  const mainPath = '/meter/data-view/meters/consumption';
+  const menus = meterArchConsRoutes.map(menu => {
+      const _menu = {...menu};
+      _menu.url = `${mainPath}${_menu.url}`;
+      return _menu;
+    });
   return (
     <div className="">
       <div className="col">
         <div className="panelBorder">
-          <SidebarMenu items={meterArchConsRoutes} tabView={true} />
+          <SidebarMenu items={menus} tabView={true} />
         </div>
         <Switch>
-          {meterArchConsRoutes?.map((route, index) => (
+          {menus?.map((route, index) => (
             <Route
               key={index}
               history={history}
@@ -22,7 +28,7 @@ const MeterArchCons = () => {
               component={route.component}
             />
           ))}
-          <Redirect from="/" to="/meter/data/consumption/day" />
+          <Redirect from="/meter/data-view/meters/consumption" to="/meter/data-view/meters/consumption/day" />
         </Switch>
       </div>
     </div>

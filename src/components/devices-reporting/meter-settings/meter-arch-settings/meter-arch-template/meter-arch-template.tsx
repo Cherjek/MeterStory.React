@@ -11,7 +11,7 @@ const reducer = (state: any, action: any) => {
 };
 const MeterArchTemplate = (props) => {
   const [state, setDataSource] = useReducer(reducer, initialState);
-  const gridSettings = { ...new DataGridSettings(), ...{ isRowDelete: false } };
+  const gridSettings = { ...new DataGridSettings(), ...{ isRowDelete: true } };
   const columns: DataGridColumn[] = [
     {
       code: 'id',

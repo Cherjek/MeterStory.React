@@ -42,6 +42,6 @@ export class NetworkCsdTemplate implements IFormTemplate {
     //   type: DataGridColumnType.Combobox
     // }, ...{values: pollType}}
   ];
-  gridSettings = { ...new DataGridSettings(), ...{ isRowDelete: false } };
+  gridSettings = { ...new DataGridSettings(), ...{ isRowDelete: true } };
   headerText = 'PPP-сервер';
 }

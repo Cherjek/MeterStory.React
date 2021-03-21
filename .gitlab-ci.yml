@@ -1,0 +1,46 @@
+image: node:latest
+
+variables:
+  GIT_STRATEGY: clone
+  GIT_CLONE_PATH: c:\GitlabRunner/builds/WebSmart
+  SERVICE_PATH: "."
+  PRODUCT_VERSION: 1.0.0.0
+  PRODUCT_NAME: WebSmart
+
+
+cache:
+  paths:
+   - ./node_modules/
+
+stages:
+  - build
+  - package
+
+build:
+  stage: build
+
+  script:
+    - echo Building...
+    - cd .
+    - rm package-lock.json
+    - call npm install
+    - call npm run build --profile
+
+
+package:
+  stage: package
+
+  only:
+    - master
+    - dev
+
+  script:
+    - echo Packaging...
+
+  variables:
+    GIT_STRATEGY: none
+
+  artifacts:
+    paths:
+      - ./dist
+    name: "%PRODUCT_NAME%.%PRODUCT_VERSION%"

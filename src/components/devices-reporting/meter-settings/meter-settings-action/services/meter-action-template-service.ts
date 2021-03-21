@@ -31,7 +31,7 @@ export class MeterActionTemplateService extends Fetch implements IFormTemplateSe
               string[]
             ]
           ) => {
-            this
+              this
               .getDataAction()
               .then((resultAction: ModelAction[]) => {
                 resultAction?.map((sett: ModelAction) => {

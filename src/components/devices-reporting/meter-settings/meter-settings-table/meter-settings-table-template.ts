@@ -117,6 +117,6 @@ export class MeterSettingsTableTemplate implements IFormTemplate {
       type: DataGridColumnType.String
     }
   ];
-  gridSettings = { ...new DataGridSettings(), ...{ isRowDelete: false, isHorizontalScroll: true } };
+  gridSettings = { ...new DataGridSettings(), ...{ isRowDelete: true, isHorizontalScroll: true } };
   headerText = 'Таблица приборов учета';
 }

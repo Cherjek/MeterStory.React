@@ -4,14 +4,18 @@ import { MeterDataSlicesConfigService } from './services/meter-data-slices-confi
 
 const MeterDataSlicesConfig = () => {
   return (
-    <PeriodDataInfo
-      data={{
-        measureCode: 'aCfg',
-        showDuration: true,
-        tableHeader: 'Срезы аппаратной конфигурации',
-        service: MeterDataSlicesConfigService
-      }}
-    />
+    <div className="main-content">
+      <div className="col">
+        <PeriodDataInfo
+          data={{
+            measureCode: 'aCfg',
+            showDuration: true,
+            tableHeader: 'Срезы аппаратной конфигурации',
+            service: MeterDataSlicesConfigService
+          }}
+        />
+      </div>
+    </div>
   );
 };
 

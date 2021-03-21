@@ -37,6 +37,6 @@ export class SchdlTemplate implements IFormTemplate {
       type: DataGridColumnType.String
     }
   ];
-  gridSettings = { ...new DataGridSettings(), ...{ isRowDelete: false } };
+  gridSettings = { ...new DataGridSettings(), ...{ isRowDelete: true } };
   headerText = 'Настройки расписаний';
 }

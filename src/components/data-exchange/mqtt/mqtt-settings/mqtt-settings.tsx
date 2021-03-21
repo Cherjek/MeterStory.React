@@ -24,12 +24,12 @@ const MqttSettings = () => {
       type: DataGridColumnType.Int,
       width: 100
     },
-    // {...{
-    //   code: 'type',
-    //   name: 'Тип протокола',
-    //   type: DataGridColumnType.Combobox,
-    //   width: 250
-    // }, ...{values: mqttSettingsType}},
+    {...{
+      code: 'type',
+      name: 'Тип протокола',
+      type: DataGridColumnType.Combobox,
+      width: 250
+    }, ...{values: mqttSettingsType}},
     {
       code: 'addr',
       name: 'Адрес',
@@ -78,7 +78,7 @@ const MqttSettings = () => {
       type: DataGridColumnType.Bool
     }
   ];
-  const gridSettings = {...new DataGridSettings(), ...{ isRowDelete: false, isHorizontalScroll: true }};
+  const gridSettings = {...new DataGridSettings(), ...{ isRowDelete: true, isHorizontalScroll: true }};
   const onCellEdit = (val) => {
     if (val.col.code === 'certCheck') {
       if (val.row[val.col.code]) {

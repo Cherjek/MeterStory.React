@@ -38,7 +38,7 @@ export class NetworkIpTemplate implements IFormTemplate {
     },
     {
       code: 'dhcp',
-      name: 'Разрешение подключения',
+      name: 'Включить DHCP',
       type: DataGridColumnType.Bool
     }
   ];

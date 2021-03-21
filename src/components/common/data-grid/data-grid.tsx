@@ -26,6 +26,7 @@ const reducer = (state: any, action: any) => {
     ...action
   };
 }
+const NumberMinMax = { min: 1, max: 65535 }
 const DataGrid = (props: any) => {
   const [state, updateDataSource] = React.useReducer(reducer, initialState);
   const columns: DataGridColumnEx[] = [...props.columns, new DataGridColumnAction()];
@@ -36,7 +37,11 @@ const DataGrid = (props: any) => {
     if (state.dataSource == null) updateDataSource({dataSource: props.dataSource});
     if (state.dataSource != null) updateColumnCallbackAfterInit();
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.dataSource, state.dataSource])
+  }, [state.dataSource])
+  React.useEffect(() => {
+    updateDataSource({dataSource: props.dataSource});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.dataSource])
   const updateColumnCallback = (row, index: number, col: DataGridComboboxColumnCallback) => {
     if (col.parent) {
       //
@@ -60,6 +65,7 @@ const DataGrid = (props: any) => {
           callbackServices.push(col.source?.service);
         }
       });
+      if (!callbackServices.length) return;
       Promise.all(
         callbackServices?.map(
           (service, index) => (service as ICallbackColumnService).getData(callBackColumns[index])
@@ -119,6 +125,10 @@ const DataGrid = (props: any) => {
       (() => {
         if (event.target.value !== '') {
           const valNumber = Number(event.target.value);
+          if (event.target.min && event.target.max) {
+            if (valNumber < Number(event.target.min)) return NumberMinMax.min;
+            else if (valNumber > Number(event.target.max)) return NumberMinMax.max; 
+          }
           if (!isNaN(valNumber)) {
             return valNumber;
           }
@@ -136,7 +146,7 @@ const DataGrid = (props: any) => {
 
     const colState = state.columns.find((c: DataGridColumnEx) => c.code === col.code);
     colState.asc = colState.asc === undefined ? true : !colState.asc;
-    updateDataSource({dataSource: orderBy.transform(newSource, col.code, colState.asc)});
+    updateDataSource({dataSource: orderBy.transform(newSource, col.code, colState.asc), isSorted: true});
   }
   const removeRow = (index: number) => {
     const dataSource = (state.dataSource as any[]);
@@ -149,7 +159,8 @@ const DataGrid = (props: any) => {
     const arrayNumber = ((state.dataSource as any[]) || [])
       .map(data => Number(data.id));
     const max = Math.max(...(arrayNumber && arrayNumber.length ? arrayNumber : [0]));
-    return max + 1;
+    if (max > NumberMinMax.max) return max - 1;
+    else return max + 1;
   }
   const addRow = () => {
     const newRow: any = {};
@@ -230,6 +241,8 @@ const DataGrid = (props: any) => {
                                   className="form-control"
                                   type="number"
                                   value={val}
+                                  min={col.code === 'id' ? NumberMinMax.min : null}
+                                  max={col.code === 'id' ? NumberMinMax.max : null}
                                   onChange={event => cellEdit(event, index, col)}
                                 />
                               ) : col.type === DataGridColumnType.DateTime ? (

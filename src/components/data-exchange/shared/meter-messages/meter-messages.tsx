@@ -25,7 +25,7 @@ const reducer = (state: any, action: any) => {
 const meterMessagesService = new MeterMessagesService();
 const MeterMessagesDataExchange = () => {
   const [state, setDataSource] = React.useReducer(reducer, initialState);
-  const gridSettings = { ...new DataGridSettings(), ...{ isRowDelete: false } };
+  const gridSettings = { ...new DataGridSettings(), ...{ isRowDelete: true } };
   const columns: DataGridColumn[] = [
     {
       code: 'id',
@@ -40,7 +40,7 @@ const MeterMessagesDataExchange = () => {
         type: DataGridColumnType.Combobox,
         width: 250,
       },
-      ...{ values: protoValues },
+      ...{ values: protoValues.slice(0, 3) },
     },
     Object.assign(new DataGridComboboxColumnCallback(), {
       code: 'MeterId',

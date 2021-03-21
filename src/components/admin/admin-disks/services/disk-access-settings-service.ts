@@ -31,16 +31,14 @@ export class DiskAccessSettingsService extends Fetch {
   clearData() {
     return super.clear();
   }
+}
 
-  diskClear(diskNumber: any) {    
-    const method = {
-      method: 'POST', // Method itself
-      headers: {
-       'Content-type': 'application/json; charset=UTF-8' // Indicates the content 
-      },
-      body: diskNumber
-    }
-    console.log(method);
-    return fetch('/action/disk/clear', method);
+export class DiskClearService extends Fetch {
+  constructor() {
+    super('/action/disk/clear');
+  }
+
+  diskClear(body: any) {
+    return super.set(body);
   }
 }

@@ -10,7 +10,7 @@ const MonthDataInfo = () => {
         measureCode: 'aMonth',
         showDuration: true,
         tableHeader: 'Показания на начало месяца',
-        groupsPu: [_groupsTypeMeterDictionary[0],_groupsTypeMeterDictionary[1]]
+        groupsPu: [_groupsTypeMeterDictionary[0]]
       }}
     />
   );

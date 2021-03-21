@@ -12,8 +12,8 @@ export class MeterDataInfoService extends Fetch {
     { code: 'TagAm', name: 'A-', checked: false },
     { code: 'TagRp', name: 'R+', checked: false },
     { code: 'TagRm', name: 'R-', checked: false },
-    { code: 'TagPls', name: 'Pls', checked: false },
-    { code: 'TagChnl', name: 'Chnl', checked: false }
+    // { code: 'TagPls', name: 'Pls', checked: false },
+    // { code: 'TagChnl', name: 'Chnl', checked: false }
   ];
 
   columns: DataGridColumn[] = [
